@@ -1,4 +1,4 @@
-"""Miscellaneous system library."""
+"""Represent bytes as LZMA-compressed, base64-encoded strings."""
 
 from __future__ import annotations
 from base64 import b64decode, b64encode
