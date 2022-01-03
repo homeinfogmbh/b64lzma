@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 from base64 import b64decode, b64encode
-from lzma import LZMACompressor, LZMADecompressor
+from lzma import compress, decompress
 
 
 __all__ = ['B64LZMA']
@@ -13,7 +13,7 @@ class B64LZMA(str):
 
     def __bytes__(self) -> bytes:
         """Returns the decompressed data."""
-        return LZMADecompressor().decompress(b64decode(self.encode()))
+        return decompress(b64decode(self.encode()))
 
     def __str__(self) -> str:
         """Returns the string decoded from __bytes__."""
@@ -32,10 +32,7 @@ class B64LZMA(str):
     @classmethod
     def from_bytes(cls, bytes_: bytes) -> B64LZMA:
         """Creates an instance from the respective bytes."""
-        lzma_compressor = LZMACompressor()
-        compressed_bytes = lzma_compressor.compress(bytes_)
-        compressed_bytes += lzma_compressor.flush()
-        return cls.from_compressed_bytes(compressed_bytes)
+        return cls.from_compressed_bytes(compress(bytes_))
 
     @classmethod
     def from_string(cls, string: str) -> B64LZMA:
