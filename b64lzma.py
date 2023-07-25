@@ -5,7 +5,7 @@ from base64 import b64decode, b64encode
 from lzma import compress, decompress
 
 
-__all__ = ['B64LZMA']
+__all__ = ["B64LZMA"]
 
 
 class B64LZMA(str):
@@ -35,6 +35,6 @@ class B64LZMA(str):
         return cls.from_compressed_bytes(compress(bytes_))
 
     @classmethod
-    def from_string(cls, string: str, *, encoding: str = 'utf-8') -> B64LZMA:
+    def from_string(cls, string: str, *, encoding: str = "utf-8") -> B64LZMA:
         """Creates an instance from the respective string."""
         return cls.from_bytes(string.encode(encoding=encoding))
